@@ -1,13 +1,19 @@
-import java.awt.BorderLayout;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-import javax.swing.JOptionPane;
-//import org.w3c.dom.Text;
+import org.w3c.dom.Text;
+import javax.swing.*;
+
+import static org.eclipse.swt.SWT.BORDER;
+
+/*
+ @author:Luis Miguel
+ @version 1.0
+ Clase que permite realizar operaciones aritmeticas basicas como suma,resta, multiplicacion y division.
+*/
 
 public class Calculadora {
 
@@ -34,7 +40,7 @@ public class Calculadora {
         if (gui==true) dibujaCalculadora();
 
     }
-
+    //Metodo privado para dibujar la interfaz grafica.
     private void dibujaCalculadora() {
 
         Display display = Display.getDefault();
@@ -216,9 +222,9 @@ public class Calculadora {
         button_11.setBounds(69, 163, 86, 33);
 
         //Texto donde se visualiza el resultado
-        texto_resultado = new Text(shlCalculadora, SWT.BORDER);
-        texto_resultado.setText("0");
-        texto_resultado.setBounds(22, 19, 196, 21);
+        texto_resultado = new Text(shlCalculadora, BORDER);
+        texto_resultado.setTextContent("0");
+        texto_resultado.equals(22);
 
         shlCalculadora.open();
         shlCalculadora.layout();
@@ -237,19 +243,24 @@ public class Calculadora {
         inicializa_resultado = true;
     }
 
+    //Establece el resultado de la claculadora como una cadena de texto.
     public String getResultadoString (){
-        return texto_resultado.getText();
+        return texto_resultado.getTextContent();
     }
 
+
+    //Devuelve un resultado como un entero
     public void setResultadoString(String s){
-        texto_resultado.setText(s);
+        texto_resultado.setTextContent(s);
     }
 
+    // Devuelve un resultado como un entero y añade un nuevo digito al numero que muestra la calculadora.
     public int getResultadoInt() {
-        String resultado = texto_resultado.getText();
+        String resultado = texto_resultado.getTextContent();
         return Integer.parseInt(resultado);
     }
 
+    // Codigo para añadir un nuevo digito al numero actual.
     public void anadeNuevoDigito(int digito){
         if (inicializa_resultado)
             setResultadoString("");
@@ -268,6 +279,7 @@ public class Calculadora {
         inicializa_resultado = false;
     }
 
+    //Codigo para ejecutar una operacion aritmetica.
     public void ejecutarOperador(String new_operacion) {
 
         int resultado;
@@ -290,6 +302,7 @@ public class Calculadora {
         operacion = new_operacion;
     }
 
+    //Codigo para ejecutar la operacion de igual.
     public void ejecutarIgual(){
         int resultado = 0;
 
@@ -300,6 +313,7 @@ public class Calculadora {
         operacion = "null";
     }
 
+    //Codigo para ejecutar la operacion actual y devolver el resultado.
     public int ejecutarOperacion() {
         int resultado = 0;
 
@@ -330,6 +344,7 @@ public class Calculadora {
         return resultado;
     }
 
+    //Codigo para mostrar el resultado en la interfaz grafica.
     public void muestraResultado(int resultado){
         setResultadoString(Integer.toString(resultado));
         valor1 = resultado;
@@ -337,6 +352,7 @@ public class Calculadora {
         inicializa_resultado = true;
     }
 
+    //Crea una instancia de la calculadora con innterfaz grafica.
     public static void main(String args[]) {
         Calculadora calculadora = new Calculadora(true);
     }
